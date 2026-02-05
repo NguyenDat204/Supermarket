@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+<div class="search-box">
+    <h2><i class="fas fa-search-dollar"></i> TRA CỨU DOANH THU</h2>
+    <form action="/orders/admin/search" method="GET" class="search-form">
+        <div class="date-inputs">
+            <div>
+                <label>Từ ngày</label>
+                <input type="date" name="startDate" required>
+            </div>
+            <div>
+                <label>Đến ngày</label>
+                <input type="date" name="endDate" required>
+            </div>
+        </div>
+        <button type="submit" class="btn-primary">Tìm kiếm ngay</button>
+    </form>
+</div>
+
+<% if (error) { %> <p class="error mt-20"><%= error %></p> <% } %>
+
+<% if (orders && orders.length > 0) { %>
+    <div class="table-responsive mt-30">
+        <h3>Kết quả tìm thấy: <%= orders.length %> đơn hàng</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Khách hàng</th>
+                    <th>Sản phẩm</th>
+                    <th>Ngày</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach(o => { %>
+                    <tr>
+                        <td><%= o.customerId.username %></td>
+                        <td><%= o.productId.name %></td>
+                        <td><%= o.orderDate.toDateString() %></td>
+                        <td><span class="status-badge <%= o.status %>"><%= o.status %></span></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } %>
+<%- include('partials/footer') %>

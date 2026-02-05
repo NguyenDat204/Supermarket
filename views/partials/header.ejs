@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarket System</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="<%= (locals.user && user.role === 'admin') ? '/orders/admin/list' : '/orders/place' %>" class="logo">
+                <i class="fas fa-shopping-basket"></i> SUPERMARKET
+            </a>
+            
+            <div class="nav-links">
+                <% if (locals.user) { %>
+                    <% if (user.role === 'customer') { %>
+                        <a href="/orders/place"><i class="fas fa-store"></i> Cửa hàng</a>
+                        <a href="/orders/cart"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
+                        <a href="/orders/cancel"><i class="fas fa-history"></i> Đơn hàng</a>
+                    <% } else { %>
+                        <a href="/orders/admin/list">Quản lý</a>
+                        <a href="/orders/admin/search">Tra cứu</a>
+                    <% } %>
+                    <span class="user-info">| 👤 <strong><%= user.username %></strong></span>
+                    <a href="/auth/logout" class="logout-link">Đăng xuất</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+    <div class="container">

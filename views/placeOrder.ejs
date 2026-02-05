@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+<h2 class="section-title">DANH SÁCH SẢN PHẨM</h2>
+<div class="product-grid">
+    <% products.forEach(p => { %>
+        <div class="card">
+            <h3><%= p.name %></h3>
+            <p class="price">$<%= p.price %></p>
+            <p>Kho: <strong><%= p.stock %></strong></p>
+            
+            <form action="/orders/add-to-cart" method="POST">
+                <input type="hidden" name="productId" value="<%= p._id %>">
+                <div style="margin-bottom: 10px;">
+                    <label>Số lượng:</label>
+                    <input type="number" name="quantity" value="1" min="1" max="<%= p.stock %>" class="qty-input" <%= p.stock <= 0 ? 'disabled' : '' %>>
+                </div>
+                <button type="submit" class="btn-primary" <%= p.stock <= 0 ? 'disabled' : '' %>>
+                    <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                </button>
+            </form>
+        </div>
+    <% }) %>
+</div>
+<%- include('partials/footer') %>

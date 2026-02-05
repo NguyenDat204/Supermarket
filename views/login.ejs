@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="auth-icon">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h2>Chào mừng trở lại</h2>
+            <p>Vui lòng đăng nhập để tiếp tục</p>
+        </div>
+
+        <% if (error) { %>
+            <div class="error-msg">
+                <i class="fas fa-exclamation-circle"></i> <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/auth/login" method="POST" class="auth-form">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Tên đăng nhập" required>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Mật khẩu" required>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <span>Đăng nhập</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Hệ thống Quản lý Siêu thị Trực tuyến v2.0</p>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

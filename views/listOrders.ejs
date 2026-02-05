@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<h2 class="section-title">QUẢN LÝ TẤT CẢ ĐƠN HÀNG</h2>
+<% if (orders.length === 0) { %>
+    <div class="empty-state">
+        <i class="fas fa-folder-open"></i>
+        <p>No orders available</p>
+    </div>
+<% } else { %>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Khách hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach(o => { %>
+                    <tr>
+                        <td><strong>#<%= o._id.toString().substring(18) %></strong></td>
+                        <td><%= o.customerId.username %></td>
+                        <td><%= o.orderDate.toLocaleString('vi-VN') %></td>
+                        <td><span class="status-badge <%= o.status %>"><%= o.status %></span></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } %>
+<%- include('partials/footer') %>

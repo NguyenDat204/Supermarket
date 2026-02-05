@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<h2 class="section-title">ĐƠN HÀNG CỦA TÔI</h2>
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>Mã đơn</th>
+                <th>Sản phẩm</th>
+                <th>Ngày đặt</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(o => { %>
+                <tr class="animate-in">
+                    <td>#<%= o._id.toString().substring(18) %></td>
+                    <td><%= o.productId.name %></td>
+                    <td><%= o.orderDate.toLocaleDateString('vi-VN') %></td>
+                    <td><span class="status-badge <%= o.status %>"><%= o.status %></span></td>
+                    <td>
+                        <% if(o.status === 'pending') { %>
+                            <a href="/orders/cancel/<%= o._id %>" class="btn-cancel" onclick="return confirm('Bạn có chắc chắn muốn hủy?')">Hủy đơn</a>
+                        <% } else { %>
+                            <span class="text-muted">N/A</span>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include('partials/footer') %>
